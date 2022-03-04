@@ -38,7 +38,7 @@ jobs:
         #Add current logged in user to the docker group.
         sudo usermod -aG docker ${USER}
         id  ${USER}
-        docker build --no-cache --rm  -t ${name}:${version} . --file dockerfiles/${dockerfilename} 
+        docker build --no-cache --rm  -t ${name}:${version} . --file ${dockerfiledir}/${dockerfilename} 
         docker image ls
         docker image history ${name}:${version} 
         docker system df -v               

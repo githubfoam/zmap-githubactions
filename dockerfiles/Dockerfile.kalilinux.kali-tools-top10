@@ -12,7 +12,10 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 
 
 # custom packages
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && \
+    apt-get install -y apt-utils && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt-get install -y --no-install-recommends \
     aircrack-ng \
     ncat  \
     hping3 \
