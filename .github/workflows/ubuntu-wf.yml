@@ -1,22 +1,22 @@
-name: "zmap CI workflow"
+name: "zmap with ubuntu  CI workflow"
 
 
 on:
   push:
-    branches: [ main ]
+    branches: [ test ]
 
 
 jobs:
 
   zmap-ubuntu-latest-job:
-    name: "build zmap with kalilinux/kali-rolling on ubuntu latest"
+    name: "build zmap with ubuntu on ubuntu latest"
     runs-on: ubuntu-latest
     env:
-      distribution: "kalilinux" #https://hub.docker.com/r/kalilinux/kali-rolling
+      distribution: "kalilinux" #https://hub.docker.com/r/ubuntu
       version: "latest"
       name: "kali/zmap"
       dockerfiledir: "dockerfiles"
-      dockerfilename: "Dockerfile.zmap"
+      dockerfilename: "Dockerfile.ubuntu.zmap"
     steps:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
@@ -28,7 +28,7 @@ jobs:
         cat /etc/issue
         cat /etc/os-release
         sudo apt-get install -y neofetch && neofetch   
-    - name: "build zmap with kalilinux/kali-rolling "
+    - name: "build zmap with ubuntu "
       run: |
         # destroyed afterwards (use --rm )
         # all subsequent Dockerfile commands generate new images and the cache is not usedi
@@ -43,7 +43,8 @@ jobs:
         docker system df -v               
         docker image inspect ${name}:${version}  
         docker inspect -f '{{.Config.Entrypoint}}' ${name}:${version}
-        docker run ${name}:${version} zmap -h       
+        # docker run ${name}:${version} zmap -h 
+        docker run  -it --rm --net=host ${name}:${version} -h      
         # docker run ${name}:${version} zmap -p 80 172.217.0.0/24 -o IPresults.csv # not OK
 
 

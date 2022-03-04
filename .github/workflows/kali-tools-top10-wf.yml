@@ -3,7 +3,7 @@ name: "kali-tools-top10 with zmap CI workflow"
 
 on:
   push:
-    branches: [ main ]
+    branches: [ test ]
 
 
 jobs:
