@@ -1,0 +1,73 @@
+name: "zmap with debian CI workflow"
+
+
+on:
+  push:
+    branches: [ test ]
+  schedule:
+      - cron:  '0 0 1 * *' ##execution of a task in the first minute of the month 
+
+
+jobs:
+
+  zmap-bullseye-ubuntu-latest-job:
+    name: "zmap with debian bullseye docker ubuntu latest"
+    runs-on: ubuntu-latest
+    env:
+      distribution: "debian" #https://hub.docker.com/_/debian
+      version: "latest"
+      name: "debian-bullseye/zmap"
+      dockerfiledir: "dockerfiles"
+      dockerfilename: "Dockerfile.debian.bullseye.zmap"
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: |
+        hostnamectl status
+        lsb_release -a
+        lsb_release -d
+        cat /etc/lsb-release
+        cat /etc/issue
+        cat /etc/os-release
+        sudo apt-get install -y neofetch && neofetch   
+    - name: "build debian zmap with debian bullseye"
+      run: |
+        # destroyed afterwards (use --rm )
+        # all subsequent Dockerfile commands generate new images and the cache is not used
+        sudo docker build --no-cache --rm  -t ${name}:${version} . --file ${dockerfiledir}/${dockerfilename} 
+        docker image ls
+        docker image history ${name}:${version}
+        docker system df -v               
+        docker image inspect ${name}:${version}
+
+
+  zmap-buster-ubuntu-latest-job:
+    name: "zmap with debian buster docker ubuntu latest"
+    runs-on: ubuntu-latest
+    env:
+      distribution: "debian" #https://hub.docker.com/_/debian
+      version: "latest"
+      name: "debian-buster/zmap"
+      dockerfiledir: "dockerfiles"
+      dockerfilename: "Dockerfile.debian.buster.zmap"
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: |
+        hostnamectl status
+        lsb_release -a
+        lsb_release -d
+        cat /etc/lsb-release
+        cat /etc/issue
+        cat /etc/os-release
+        sudo apt-get install -y neofetch && neofetch   
+    - name: "build debian zmap with debian buster"
+      run: |
+        # destroyed afterwards (use --rm )
+        # all subsequent Dockerfile commands generate new images and the cache is not used
+        sudo docker build --no-cache --rm  -t ${name}:${version} . --file ${dockerfiledir}/${dockerfilename} 
+        docker image ls
+        docker image history ${name}:${version}
+        docker system df -v               
+        docker image inspect ${name}:${version}        
+
