@@ -1,32 +1,9 @@
-FROM centos:centos8
+# https://quay.io/repository/centos/centos
+FROM quay.io/centos/centos:stream8
 
 LABEL org.opencontainers.image.authors="githubfoam"
 
-# verify centos stream 
-RUN echo "================os-release=======================" && \
-    echo "=================================================" && \
-    cat /etc/os-release && \
-    echo "=================================================" && \
-    echo "================os-release======================="
-
-# convert centos 8
-RUN dnf install centos-release-stream -yq && \
-    dnf swap centos-{linux,stream}-repos -yq && \
-    dnf distro-sync -yq && \
-    dnf clean all && \
-    dnf autoremove -yq && \
-    rm -rf /var/cache/*/*
-
-# verify centos stream8 
-RUN echo "================os-release=======================" && \
-    echo "=================================================" && \
-    cat /etc/os-release && \
-    echo "=================================================" && \
-    echo "================os-release======================="
-
 RUN set -xe && \
-    sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-* && \
-    sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-* && \
     yum update -qy && \
     yum install zmap
 
