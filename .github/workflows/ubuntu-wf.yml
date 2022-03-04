@@ -50,7 +50,7 @@ jobs:
         docker run --rm --net=host ${name}:${version} zmap -h 
         # List available probe modules
         # IPv6 support
-        docker run --rm --net=host ${name}:${version} zmap -M --list-probe-modules                                         
+        docker run --rm --net=host ${name}:${version} zmap --list-probe-modules                                         
         # docker run ${name}:${version} zmap -p 80 172.217.0.0/24 -o IPresults.csv # not OK
 
   # zmap-1804-ubuntu-latest-job:
