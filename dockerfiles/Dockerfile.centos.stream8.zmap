@@ -1,0 +1,33 @@
+FROM centos:centos8
+
+LABEL org.opencontainers.image.authors="githubfoam"
+
+# verify centos stream 
+RUN echo "================os-release=======================" && \
+    echo "=================================================" && \
+    cat /etc/os-release && \
+    echo "=================================================" && \
+    echo "================os-release======================="
+
+# convert centos 8
+RUN dnf install centos-release-stream -yq && \
+    dnf swap centos-{linux,stream}-repos -yq && \
+    dnf distro-sync -yq && \
+    dnf clean all && \
+    dnf autoremove -yq && \
+    rm -rf /var/cache/*/*
+
+# verify centos stream8 
+RUN echo "================os-release=======================" && \
+    echo "=================================================" && \
+    cat /etc/os-release && \
+    echo "=================================================" && \
+    echo "================os-release======================="
+
+RUN set -xe && \
+    yum update -qy && \
+    yum install zmap
+
+ENTRYPOINT ["zmap"]
+CMD ["-h"]
+
