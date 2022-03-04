@@ -30,7 +30,7 @@ jobs:
         sudo apt-get install -y neofetch && neofetch 
         wget -q https://github.com/zmap/zmap/archive/master.zip  
         ls -lai
-        unzip -q ${ZMAP_COMMIT}.zip
+        unzip -q master.zip
         ls -lai
     # - name: "build zmap with ubuntu "
     #   run: |

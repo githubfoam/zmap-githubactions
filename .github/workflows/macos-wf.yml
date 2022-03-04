@@ -1,0 +1,38 @@
+name: "zmap with macos  CI workflow"
+
+
+on:
+  push:
+    branches: [ test ]
+
+
+jobs:
+
+# https://github.com/actions/virtual-environments       
+  zmap-macos-latest:
+      name: "zmap  macos-latest"
+      runs-on: macos-latest
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: "brew update"
+        run: brew update     
+      - name: "check on brew version"
+        run: brew --version               
+      - name: "install zmap"
+        run: brew install zmap            
+      - name: "brew cask list"
+        run:   brew list --cask #Warning: Calling brew cask list is deprecated! Use brew list [--cask] instead.
+      - name: "brew list --formula"
+        run: brew list --formula #List all the installed formulas
+      - name: "Get OS X System Version"
+        run: sw_vers       
+      - name: "Get Mac System Details with system_profiler"
+        run: system_profiler | more  
+      - name: "osfingerprinting"
+        run: uname -a 
+      - name: "run zmap"
+        run: zmap -h       
+
+
+           
