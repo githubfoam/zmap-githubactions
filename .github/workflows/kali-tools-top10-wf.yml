@@ -1,4 +1,4 @@
-name: "kali-tools-top10 CI workflow"
+name: "kali-tools-top10 with zmap CI workflow"
 
 
 on:
@@ -9,7 +9,7 @@ on:
 jobs:
 
   ubuntu-latest-job:
-    name: "docker kali linux ubuntu 20.04"
+    name: "build kali-tools-top10 with zmap on ubuntu latest"
     runs-on: ubuntu-latest
     env:
       distribution: "kalilinux" #https://hub.docker.com/r/kalilinux/kali-rolling
@@ -28,7 +28,7 @@ jobs:
         cat /etc/issue
         cat /etc/os-release
         sudo apt-get install -y neofetch && neofetch   
-    - name: "docker build kali linux"
+    - name: "build kali-tools-top10 with zmap"
       run: |
         # destroyed afterwards (use --rm )
         # all subsequent Dockerfile commands generate new images and the cache is not used
