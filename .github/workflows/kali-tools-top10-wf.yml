@@ -1,0 +1,56 @@
+name: "kali-tools-top10 CI workflow"
+
+
+on:
+  push:
+    branches: [ main ]
+
+
+jobs:
+
+  ubuntu-latest-job:
+    name: "docker kali linux ubuntu 20.04"
+    runs-on: ubuntu-latest
+    env:
+      distribution: "kalilinux" #https://hub.docker.com/r/kalilinux/kali-rolling
+      version: "latest"
+      name: "kali:kali-tools-top10"
+      dockerfiledir: "dockerfiles"
+      dockerfilename: "Dockerfile.kalilinux.kali-tools-top10"
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: |
+        hostnamectl status
+        lsb_release -a
+        lsb_release -d
+        cat /etc/lsb-release
+        cat /etc/issue
+        cat /etc/os-release
+        sudo apt-get install -y neofetch && neofetch   
+    - name: "docker build kali linux"
+      run: |
+        # destroyed afterwards (use --rm )
+        # all subsequent Dockerfile commands generate new images and the cache is not used
+        sudo docker build --no-cache --rm  -t ${name} . --file dockerfiles/${dockerfilename}
+        docker image ls
+        docker image history ${name}:${version} 
+        docker system df -v               
+        docker image inspect ${name}:${version}    
+        docker container ls -a
+        # docker run --name toolkali ${name}:${version}  sh -c "hping3 --traceroute -v -1 www.wisetut.com"
+    - name: "docker forensics kali linux"
+      run: |
+        # destroyed afterwards (use --rm )
+        # all subsequent Dockerfile commands generate new images and the cache is not used
+        # sudo docker build --no-cache --rm  -t ${name}:${version}  . --file dockerfiles/Dockerfile.kalilinux.kali-tools-top10 
+        docker build --no-cache --rm  -t ${name}:${version} . --file dockerfiles/${dockerfilename} 
+        docker image ls
+        docker image history ${name}:${version} 
+        docker system df -v               
+        docker image inspect ${name}:${version}   
+        docker container ls -a
+        docker run --detach --name toolkali ${name}:${version}  
+        docker container ls -a
+
+        
