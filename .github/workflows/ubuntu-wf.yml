@@ -8,15 +8,15 @@ on:
 
 jobs:
 
-  zmap-ubuntu-latest-job:
-    name: "build zmap with ubuntu on ubuntu latest"
+  zmap-1604-ubuntu-latest-job:
+    name: "build zmap with ubuntu 16.04 on ubuntu latest"
     runs-on: ubuntu-latest
     env:
       distribution: "kalilinux" #https://hub.docker.com/r/ubuntu
       version: "latest"
       name: "ubuntu/zmap"
       dockerfiledir: "dockerfiles"
-      dockerfilename: "Dockerfile.ubuntu.zmap"
+      dockerfilename: "Dockerfile.ubuntu.16.04.zmap"
     steps:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
@@ -28,14 +28,7 @@ jobs:
         cat /etc/issue
         cat /etc/os-release
         sudo apt-get install -y neofetch && neofetch 
-        # wget -q https://github.com/zmap/zmap/archive/master.zip 
-        # wget -q https://github.com/zmap/zmap/archive/main.zip 
-        # ls -lai
-        # unzip -q master.zip
-        # ls -lai
-        # cd zmap-main
-        # (cmake . && make -j4 && make install) 2>&1 > /dev/null
-    - name: "build zmap with ubuntu "
+    - name: "build zmap with ubuntu 16.04 "
       run: |
         # destroyed afterwards (use --rm )
         # all subsequent Dockerfile commands generate new images and the cache is not usedi
@@ -57,5 +50,46 @@ jobs:
         docker run --rm --net=host ${name}:${version} zmap -h             
         # docker run ${name}:${version} zmap -p 80 172.217.0.0/24 -o IPresults.csv # not OK
 
+  zmap-1804-ubuntu-latest-job:
+    name: "build zmap with ubuntu 18.04 on ubuntu latest"
+    runs-on: ubuntu-latest
+    env:
+      distribution: "kalilinux" #https://hub.docker.com/r/ubuntu
+      version: "latest"
+      name: "ubuntu/zmap"
+      dockerfiledir: "dockerfiles"
+      dockerfilename: "Dockerfile.ubuntu.18.04.zmap"
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: |
+        hostnamectl status
+        lsb_release -a
+        lsb_release -d
+        cat /etc/lsb-release
+        cat /etc/issue
+        cat /etc/os-release
+        sudo apt-get install -y neofetch && neofetch 
+    - name: "build zmap with ubuntu 18.04 "
+      run: |
+        # destroyed afterwards (use --rm )
+        # all subsequent Dockerfile commands generate new images and the cache is not usedi
+        whoami
+        echo ${USER} 
+        #Add current logged in user to the docker group.
+        sudo usermod -aG docker ${USER}
+        id  ${USER}
+        docker build --no-cache --rm  -t ${name}:${version} . --file ${dockerfiledir}/${dockerfilename} 
+        docker image ls
+        docker image history ${name}:${version} 
+        docker system df -v               
+        docker image inspect ${name}:${version}  
+          echo "################## ENTRYPOINT ##################"
+        docker inspect -f '{{.Config.Entrypoint}}' ${name}:${version}
+        # the input device is not a TTY
+        # docker run  -it --rm --net=host ${name}:${version} -h 
+        # docker run ${name}:${version} zmap -h
+        docker run --rm --net=host ${name}:${version} zmap -h             
+        # docker run ${name}:${version} zmap -p 80 172.217.0.0/24 -o IPresults.csv # not OK
 
            
