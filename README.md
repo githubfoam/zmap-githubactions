@@ -77,3 +77,9 @@ icmp6_echoscan
 quic_initial
 ipv6_quic_initial
 ~~~~
+
+~~~~
+https://github.com/zmap/zmap
+https://github.com/tumi8/zmap
+https://ipv6hitlist.github.io/
+~~~~
