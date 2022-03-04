@@ -1,4 +1,4 @@
-name: "zmap with fedora CI workflow"
+name: "zmap with centos stream9 CI workflow"
 
 
 on:
@@ -8,15 +8,15 @@ on:
 
 jobs:
 
-  ubuntu-latest-job:
-    name: "zmap with fedora on ubuntu latest"
+  zmap-centos-stream9-ubuntu-latest-job:
+    name: "zmap with centos stream9 on ubuntu-latest"
     runs-on: ubuntu-latest
     env:
-      distribution: "archlinux" #https://hub.docker.com/_/archlinux
+      distribution: "centos" #https://hub.docker.com/_/centos
       version: "latest"
-      name: "fedora:snort"
-      dockerfiledir: "dockerfiles"      
-      dockerfilename: "Dockerfile.fedora.zmap"
+      name: "centos-stream9/zmap"
+      dockerfiledir: "dockerfiles"  
+      dockerfilename: "Dockerfile.centos.stream9.zmap"
     steps:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
@@ -27,7 +27,7 @@ jobs:
         cat /etc/lsb-release
         cat /etc/issue
         cat /etc/os-release
-    - name: "build zmap with fedora"
+    - name: "build zmap centos stream"
       run: |
         # destroyed afterwards (use --rm )
         # all subsequent Dockerfile commands generate new images and the cache is not used
@@ -35,7 +35,7 @@ jobs:
         docker image ls
         docker image history ${name}:${version}
         docker system df -v               
-        docker image inspect ${name}:${version}     
+        docker image inspect ${name}:${version} 
         echo "################## ENTRYPOINT ##################" 
         docker inspect -f '{{.Config.Entrypoint}}' ${name}:${version}
         docker run ${name}:${version} zmap -h       
