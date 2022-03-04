@@ -1,0 +1,11 @@
+FROM centos:centos7
+
+LABEL org.opencontainers.image.authors="githubfoam"
+
+RUN set -xe && \
+    yum update -qy && \
+    yum install zmap
+
+ENTRYPOINT ["zmap"]
+CMD ["-h"]
+
