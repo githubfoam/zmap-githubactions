@@ -8,8 +8,8 @@ on:
 
 jobs:
 
-  ubuntu-latest-job:
-    name: "kali-tools-vulnerability ubuntu 20.04"
+  zmap-ubuntu-latest-job:
+    name: "build zmap with kalilinux/kali-rolling on ubuntu latest"
     runs-on: ubuntu-latest
     env:
       distribution: "kalilinux" #https://hub.docker.com/r/kalilinux/kali-rolling
@@ -28,11 +28,10 @@ jobs:
         cat /etc/issue
         cat /etc/os-release
         sudo apt-get install -y neofetch && neofetch   
-    - name: "docker build kali linux"
+    - name: "build zmap with kalilinux/kali-rolling "
       run: |
         # destroyed afterwards (use --rm )
-        # all subsequent Dockerfile commands generate new images and the cache is not used
-        # sudo docker build --no-cache --rm  -t ${name}:${version} . --file ${dockerfiledir}/${dockerfilename} 
+        # all subsequent Dockerfile commands generate new images and the cache is not usedi
         whoami
         echo ${USER} 
         #Add current logged in user to the docker group.

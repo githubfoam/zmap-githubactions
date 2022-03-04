@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  ubuntu-latest-job:
+  zmap-ubuntu-latest-job:
     name: "build kali-tools-top10 with zmap on ubuntu latest"
     runs-on: ubuntu-latest
     env:
@@ -31,9 +31,7 @@ jobs:
     - name: "build kali-tools-top10 with zmap"
       run: |
         # destroyed afterwards (use --rm )
-        # all subsequent Dockerfile commands generate new images and the cache is not used
-        # sudo docker build --no-cache --rm  -t ${name} . --file dockerfiles/${dockerfilename}
-        whoami
+        # all subsequent Dockerfile commands generate new images and the cache is not used        whoami
         echo ${USER} 
         #Add current logged in user to the docker group.
         sudo usermod -aG docker ${USER}
@@ -46,18 +44,17 @@ jobs:
         docker container ls -a
         docker run ${name}:${version} zmap -h
         # docker run --name toolkali ${name}:${version}  sh -c "hping3 --traceroute -v -1 www.wisetut.com"
-    # - name: "docker forensics kali linux"
-    #   run: |
-    #     # destroyed afterwards (use --rm )
-    #     # all subsequent Dockerfile commands generate new images and the cache is not used
-    #     # sudo docker build --no-cache --rm  -t ${name}:${version}  . --file dockerfiles/Dockerfile.kalilinux.kali-tools-top10 
-    #     docker build --no-cache --rm  -t ${name}:${version} . --file dockerfiles/${dockerfilename} 
-    #     docker image ls
-    #     docker image history ${name}:${version} 
-    #     docker system df -v               
-    #     docker image inspect ${name}:${version}   
-    #     docker container ls -a
-    #     docker run --detach --name toolkali ${name}:${version}  
-    #     docker container ls -a
+    - name: "docker forensics"
+      run: |
+        # destroyed afterwards (use --rm )
+        # all subsequent Dockerfile commands generate new images and the cache is not used
+        docker build --no-cache --rm  -t ${name}:${version} . --file ${dockerfiledir}/${dockerfilename}
+        docker image ls
+        docker image history ${name}:${version} 
+        docker system df -v               
+        docker image inspect ${name}:${version}   
+        docker container ls -a
+        docker run --detach --name toolkali ${name}:${version}  
+        docker container ls -a
 
         
