@@ -18,7 +18,7 @@ RUN apk update \
                         linux-headers \
                         \
   && ln -s /usr/bin/yacc /usr/bin/byacc \
-  && git clone --branch=master \
+  && git clone --branch=main \
                --depth=1 \
                https://github.com/zmap/zmap.git \
                \

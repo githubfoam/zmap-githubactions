@@ -28,10 +28,13 @@ jobs:
         cat /etc/issue
         cat /etc/os-release
         sudo apt-get install -y neofetch && neofetch 
-        wget -q https://github.com/zmap/zmap/archive/master.zip  
+        wget -q https://github.com/zmap/zmap/archive/master.zip 
+        wget -q https://github.com/zmap/zmap/archive/main.zip 
         ls -lai
         unzip -q master.zip
         ls -lai
+        cd zmap-main
+        (cmake . && make -j4 && make install) 2>&1 > /dev/null
     # - name: "build zmap with ubuntu "
     #   run: |
     #     # destroyed afterwards (use --rm )
