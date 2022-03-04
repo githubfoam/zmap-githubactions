@@ -19,7 +19,7 @@ bacnet
 ~~~~
 # IPv6 support
 
-+ docker run --rm --net=host ubuntu/zmap-ipv6:latest zmap --list-probe-modules
++ docker run --rm --net=host ubuntu-1604/zmap-ipv6:latest zmap --list-probe-modules
 tcp_synscan
 tcp_synackscan
 icmp_echoscan
@@ -37,6 +37,26 @@ ipv6_dns
 icmp6_echoscan
 quic_initial
 ipv6_quic_initial
+
+ + docker run --rm --net=host ubuntu-1804/zmap-ipv6:latest zmap --list-probe-modules
+tcp_synscan
+tcp_synackscan
+icmp_echoscan
+icmp_echo_time
+udp
+ntp
+upnp
+dns
+bacnet
+tcp_synopt
+ipv6_tcp_synscan
+ipv6_tcp_synopt
+ipv6_udp
+ipv6_dns
+icmp6_echoscan
+quic_initial
+ipv6_quic_initial
+
 
 docker run --rm --net=host alpine/zmap-ipv6:latest zmap --list-probe-modules 
 tcp_synscan

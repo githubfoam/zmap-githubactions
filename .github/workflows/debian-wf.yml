@@ -41,7 +41,11 @@ jobs:
         docker image inspect ${name}:${version}
         echo "################## ENTRYPOINT ##################" 
         docker inspect -f '{{.Config.Entrypoint}}' ${name}:${version}
-        docker run ${name}:${version} zmap -h       
+        docker run ${name}:${version} zmap -h   
+        # List available probe modules
+        # IPv6 support
+        docker run --rm --net=host ${name}:${version} zmap --list-probe-modules                                         
+        # docker run --rm --net=host ${name}:${version} zmap --probe-module=icmp6_echoscan               
         # docker run ${name}:${version} zmap -p 80 172.217.0.0/24 -o IPresults.csv # not OK
 
 
@@ -77,7 +81,11 @@ jobs:
         docker image inspect ${name}:${version}  
         echo "################## ENTRYPOINT ##################" 
         docker inspect -f '{{.Config.Entrypoint}}' ${name}:${version}
-        docker run ${name}:${version} zmap -h       
+        docker run ${name}:${version} zmap -h     
+        # List available probe modules
+        # IPv6 support
+        docker run --rm --net=host ${name}:${version} zmap --list-probe-modules                                         
+        # docker run --rm --net=host ${name}:${version} zmap --probe-module=icmp6_echoscan             
         # docker run ${name}:${version} zmap -p 80 172.217.0.0/24 -o IPresults.csv # not OK
 
 
