@@ -1,5 +1,6 @@
 # https://quay.io/repository/centos/centos?tab=tags&tag=stream9
-FROM centos:centos9
+# FROM centos:centos9
+fROM quay.io/centos/centos9:latest
 
 LABEL org.opencontainers.image.authors="githubfoam"
 

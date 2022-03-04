@@ -1,4 +1,4 @@
-name: "zmap with centos8 CI workflow"
+name: "zmap with centos7 CI workflow"
 
 
 on:
