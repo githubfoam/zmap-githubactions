@@ -1,4 +1,4 @@
-name: "zmap with alpine  CI workflow"
+name: "zmap IPV6 with alpine  CI workflow"
 
 
 on:
@@ -8,15 +8,15 @@ on:
 
 jobs:
 
-  zmap-ubuntu-latest-job:
-    name: "build zmap with alpine on ubuntu latest"
+  zmap-ipv6-ubuntu-latest-job:
+    name: "build zmap ipv6 support with alpine on ubuntu latest"
     runs-on: ubuntu-latest
     env:
       distribution: "kalilinux" #https://hub.docker.com/r/ubuntu
       version: "latest"
-      name: "alpine/zmap"
+      name: "alpine/zmap-ipv6"
       dockerfiledir: "dockerfiles"
-      dockerfilename: "Dockerfile.alpine.zmap"
+      dockerfilename: "Dockerfile.alpine.zmap.ipv6"
     steps:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
@@ -28,7 +28,7 @@ jobs:
         cat /etc/issue
         cat /etc/os-release
         sudo apt-get install -y neofetch && neofetch   
-    - name: "build zmap with alpine "
+    - name: "build zmap ipv6 support with alpine "
       run: |
         # destroyed afterwards (use --rm )
         # all subsequent Dockerfile commands generate new images and the cache is not usedi
@@ -47,5 +47,11 @@ jobs:
         # the input device is not a TTY
         # docker run  -it --rm --net=host ${name}:${version} -h 
         # docker run ${name}:${version} zmap -h
-        docker run --rm --net=host ${name}:${version} zmap -h      
+        docker run --rm --net=host ${name}:${version} zmap -h   
+        # List available probe modules
+        # IPv6 support
+        docker run --rm --net=host ${name}:${version} zmap --list-probe-modules                                         
+        # docker run --rm --net=host ${name}:${version} zmap --probe-module=icmp6_echoscan   
         # docker run ${name}:${version} zmap -p 80 172.217.0.0/24 -o IPresults.csv # not OK
+
+           
