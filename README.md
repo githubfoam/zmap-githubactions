@@ -1,6 +1,14 @@
 # zmap-githubactions
 [![kali-tools-top10 with zmap CI workflow](https://github.com/githubfoam/zmap-githubactions/actions/workflows/kali-tools-top10-wf.yml/badge.svg)](https://github.com/githubfoam/zmap-githubactions/actions/workflows/kali-tools-top10-wf.yml)  
-[![zmap CI workflow](https://github.com/githubfoam/zmap-githubactions/actions/workflows/zmap-wf.yml/badge.svg)](https://github.com/githubfoam/zmap-githubactions/actions/workflows/zmap-wf.yml)  
+[![zmap IPV6 with alpine  CI workflow](https://github.com/githubfoam/zmap-githubactions/actions/workflows/alpine-ipv6-wf.yml/badge.svg)](https://github.com/githubfoam/zmap-githubactions/actions/workflows/alpine-ipv6-wf.yml)  
+[![zmap IPV6 with ubuntu  CI workflow](https://github.com/githubfoam/zmap-githubactions/actions/workflows/ubuntu-ipv6-wf.yml/badge.svg)](https://github.com/githubfoam/zmap-githubactions/actions/workflows/ubuntu-ipv6-wf.yml)  
+[![zmap with alpine  CI workflow](https://github.com/githubfoam/zmap-githubactions/actions/workflows/alpine-wf.yml/badge.svg)](https://github.com/githubfoam/zmap-githubactions/actions/workflows/alpine-wf.yml)  
+[![zmap with archlinux  CI workflow](https://github.com/githubfoam/zmap-githubactions/actions/workflows/archlinux-wf.yml/badge.svg)](https://github.com/githubfoam/zmap-githubactions/actions/workflows/archlinux-wf.yml)  
+[![zmap with debian CI workflow](https://github.com/githubfoam/zmap-githubactions/actions/workflows/debian-wf.yml/badge.svg)](https://github.com/githubfoam/zmap-githubactions/actions/workflows/debian-wf.yml)  
+[![zmap with fedora CI workflow](https://github.com/githubfoam/zmap-githubactions/actions/workflows/fedora.yml/badge.svg)](https://github.com/githubfoam/zmap-githubactions/actions/workflows/fedora.yml)  
+[![zmap with kalilinux/kali-rolling  CI workflow](https://github.com/githubfoam/zmap-githubactions/actions/workflows/kalilinux-wf.yml/badge.svg)](https://github.com/githubfoam/zmap-githubactions/actions/workflows/kalilinux-wf.yml)  
+[![zmap with macos  CI workflow](https://github.com/githubfoam/zmap-githubactions/actions/workflows/macos-wf.yml/badge.svg)](https://github.com/githubfoam/zmap-githubactions/actions/workflows/macos-wf.yml)  
+[![zmap with ubuntu  CI workflow](https://github.com/githubfoam/zmap-githubactions/actions/workflows/ubuntu-wf.yml/badge.svg)](https://github.com/githubfoam/zmap-githubactions/actions/workflows/ubuntu-wf.yml)    
 
 ~~~~
 https://github.com/zmap/zmap
