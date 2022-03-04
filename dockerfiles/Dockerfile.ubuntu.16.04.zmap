@@ -5,12 +5,33 @@ FROM ubuntu:18.04
 
 ENV ZMAP_COMMIT main
 
-RUN apt-get -qq update && apt-get -qqy upgrade
-# install zmap build dependencies
-RUN apt-get -qqy install build-essential cmake libgmp3-dev gengetopt libpcap-dev flex byacc libjson-c-dev pkg-config libunistring-dev wget unzip
+RUN set -xe && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt-get -qq update && apt-get -qqy upgrade
 
-RUN apt-get -qqy install python-dev python-pip
+# install zmap build dependencies
+RUN set -xe && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt-get -qqy install \
+        build-essential \ 
+        cmake \
+        libgmp3-dev \
+        gengetopt \
+        libpcap-dev \
+        flex \
+        byacc \
+        libjson-c-dev \
+        pkg-config \
+        libunistring-dev \
+        wget \
+        unzip
+
+RUN set -xe && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt-get -qqy install python-dev python-pip
+
 RUN pip install dumb-init
+
 RUN wget -q https://github.com/zmap/zmap/archive/${ZMAP_COMMIT}.zip && \
     unzip -q ${ZMAP_COMMIT}.zip && \
     cd zmap-${ZMAP_COMMIT} && \
