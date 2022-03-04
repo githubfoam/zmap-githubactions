@@ -14,7 +14,7 @@ jobs:
     env:
       distribution: "kalilinux" #https://hub.docker.com/r/kalilinux/kali-rolling
       version: "latest"
-      name: "kali:kali-tools-top10"
+      name: "kali/kali-tools-top10"
       dockerfiledir: "dockerfiles"
       dockerfilename: "Dockerfile.kalilinux.kali-tools-top10"
     steps:
