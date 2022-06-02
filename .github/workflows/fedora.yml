@@ -1,4 +1,4 @@
-name: "zmap with fedora CI workflow"
+name: "zmap with fedora without builderx CI workflow"
 
 
 on:
@@ -78,6 +78,11 @@ jobs:
             # my-docker-hub-namespace/my-docker-hub-repository
             ${{ secrets.DOCKERHUB_USERNAME }}/zmap-fedora
             ghcr.io/${{ github.repository }}
+        tags: |
+            # minimal
+            type=semver,pattern={{version}}
+            # use custom value instead of git tag
+            type=semver,pattern={{version}},value=v1.0.0 
 
     # https://github.com/docker/build-push-action
     - name: "Build and push Docker images"
