@@ -1,4 +1,5 @@
 
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuring-dependabot-version-updates#enabling-version-updates-on-forks
 version: 2
 updates:
   # Maintain dependencies for GitHub Actions
