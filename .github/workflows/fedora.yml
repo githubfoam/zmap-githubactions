@@ -3,8 +3,13 @@ name: "zmap with fedora CI workflow"
 
 on:
   push:
-    branches: [ test ]
-
+    branches:
+      - 'test'
+    tags:
+      - 'v*'    
+  pull_request:
+    branches:
+      - 'test'
 
 jobs:
 
@@ -47,7 +52,8 @@ jobs:
         # docker run ${name}:${version} zmap -p 80 172.217.0.0/24 -o IPresults.csv # not OK
 
     - name: "Login to DockerHub"
-      uses: docker/login-action@v1
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v2
       with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}    
@@ -57,12 +63,23 @@ jobs:
       with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_PAT }}          
+          password: ${{ secrets.GHCR_PAT }}    
 
-      # - name: "Build and push Docker image"
-      #   uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-      #   with:
-      #     context: .
-      #     push: true
-      #     tags: ${{ steps.meta.outputs.tags }}
-      #     labels: ${{ steps.meta.outputs.labels }}          
+      # https://github.com/docker/metadata-action
+        name: "Extract metadata (tags, labels) for Docker"
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            oskardudycz/eventsourcing.nodejs.simple:latest 
+            # my-docker-hub-namespace/my-docker-hub-repository
+            ${{ secrets.DOCKERHUB_USERNAME }}/zmap-fedora:latest
+            ghcr.io/${{ github.repository }}
+
+      - name: "Build and push Docker images"
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}}          
