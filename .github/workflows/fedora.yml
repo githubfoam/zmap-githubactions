@@ -26,7 +26,7 @@ jobs:
         lsb_release -d
         cat /etc/lsb-release
         cat /etc/issue
-        cat /etc/os-release
+        # cat /etc/os-release
     - name: "build zmap with fedora"
       run: |
         # destroyed afterwards (use --rm )
