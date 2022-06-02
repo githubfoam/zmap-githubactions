@@ -84,7 +84,8 @@ jobs:
       uses: docker/build-push-action@v3
       with:
           context: .
-          path: ./dockerfiles/Dockerfile
+          path: 'dockerfiles/Dockerfile'
+          # path: ./dockerfiles/Dockerfile NOT OK
           #path: ${{ steps.meta.outputs.tags }}/dockerfiles/Dockerfile.fedora.zmap
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
