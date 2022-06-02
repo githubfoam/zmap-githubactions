@@ -84,8 +84,8 @@ jobs:
       uses: docker/build-push-action@v3
       with:
           context: .
-          path: ./dockerfiles/Dockerfile.fedora.zmap
-          # path: ${{ context }}/dockerfiles/Dockerfile.fedora.zmap
+          path: ./dockerfiles/Dockerfile
+          # path: ${{ steps.meta.outputs.tags }}/dockerfiles/Dockerfile.fedora.zmap
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}}          
