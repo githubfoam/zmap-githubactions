@@ -23,7 +23,9 @@ jobs:
       dockerfiledir: "dockerfiles"      
       dockerfilename: "Dockerfile.fedora.zmap"
     steps:
-    - uses: actions/checkout@v2
+
+    # https://github.com/actions/checkout
+    - uses: actions/checkout@v3
     - name: "os fingerprinting"
       run: |
         hostnamectl status
@@ -51,6 +53,7 @@ jobs:
         # docker run --rm --net=host ${name}:${version} zmap --probe-module=icmp6_echoscan                 
         # docker run ${name}:${version} zmap -p 80 172.217.0.0/24 -o IPresults.csv # not OK
 
+    # https://github.com/docker/login-action
     - name: "Login to DockerHub"
       if: github.event_name != 'pull_request'
       uses: docker/login-action@v2
@@ -73,11 +76,12 @@ jobs:
       with:
         images: |
             # my-docker-hub-namespace/my-docker-hub-repository
-            ${{ secrets.DOCKERHUB_USERNAME }}/zmap-fedora:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/zmap-fedora
             ghcr.io/${{ github.repository }}
 
+    # https://github.com/docker/build-push-action
     - name: "Build and push Docker images"
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3
       with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
