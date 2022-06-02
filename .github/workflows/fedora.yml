@@ -44,6 +44,9 @@ jobs:
         docker run --rm --net=host ${name}:${version} zmap --list-probe-modules                                         
         # docker run --rm --net=host ${name}:${version} zmap --probe-module=icmp6_echoscan                 
         # docker run ${name}:${version} zmap -p 80 172.217.0.0/24 -o IPresults.csv # not OK
-    - name: "publish zmap with fedora"
-      run: |
-        docker image ls
+    
+      - name: "Login to DockerHub"
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}    
