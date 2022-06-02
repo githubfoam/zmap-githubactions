@@ -71,7 +71,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v4
       with:
-      images: |
+        images: |
             oskardudycz/eventsourcing.nodejs.simple:latest 
             # my-docker-hub-namespace/my-docker-hub-repository
             ${{ secrets.DOCKERHUB_USERNAME }}/zmap-fedora:latest
