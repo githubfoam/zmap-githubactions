@@ -2,6 +2,10 @@
 [![kali-tools-top10 with zmap CI workflow](https://github.com/githubfoam/zmap-githubactions/actions/workflows/kali-tools-top10-wf.yml/badge.svg)](https://github.com/githubfoam/zmap-githubactions/actions/workflows/kali-tools-top10-wf.yml)  
 [![zmap CI workflow](https://github.com/githubfoam/zmap-githubactions/actions/workflows/zmap-wf.yml/badge.svg)](https://github.com/githubfoam/zmap-githubactions/actions/workflows/zmap-wf.yml)  
 
+
+[![Docker Automated build](https://img.shields.io/docker/automated/dockerfoam/onos.svg?style=plastic)](https://hub.docker.com/r/dockerfoam/zmap-fedora/)  
+[![Docker Pulls](https://img.shields.io/docker/pulls/dockerfoam/onos.svg?style=plastic)](https://hub.docker.com/r/dockerfoam/zmap-fedora/)    
+[![Docker Stars](https://img.shields.io/docker/stars/dockerfoam/onos.svg?style=plastic)](https://hub.docker.com/r/dockerfoam/zmap-fedora/)  
 ~~~~
 https://github.com/zmap/zmap
  
